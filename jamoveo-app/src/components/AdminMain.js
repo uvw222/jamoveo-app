@@ -1,7 +1,8 @@
-
+// src/components/AdminMain.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css'; 
+
 function AdminMain() {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function AdminMain() {
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '2em' }}>
+    <div className="container">
       <h2>Search any song...</h2>
       <form onSubmit={handleSearch}>
         <input 
@@ -25,7 +26,7 @@ function AdminMain() {
           style={{ padding: '0.5em', width: '60%' }}
         />
         <br /><br />
-        <button type="submit" style={{ padding: '0.5em 1em' }}>Search</button>
+        <button type="submit">Search</button>
       </form>
     </div>
   );

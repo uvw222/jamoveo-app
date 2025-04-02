@@ -5,6 +5,7 @@ import socket from '../socket';
 import heyJude from '../songs/hey_jude.json';
 import veechShelo from '../songs/veech_shelo.json';
 import '../App.css'; 
+
 function Results() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,18 +25,14 @@ function Results() {
   );
 
   const handleSelect = (song) => {
-    // Emit the songUpdate event for all connected clients
     console.log('Admin: Emitting songUpdate:', song);
     socket.emit('songUpdate', song);
-    // For consistency, try to pass the instrument from localStorage if available.
-    // (For admin signups, instrument might not be stored; in that case, an empty string is passed.)
     const instrument = localStorage.getItem('instrument') || '';
-    // Navigate admin to the live view; you can include instrument if needed.
     navigate('/live', { state: { song, userRole: 'admin', instrument } });
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '2em' }}>
+    <div className="container">
       <h2>Search Results for "{query}"</h2>
       {filteredSongs.length > 0 ? (
         <ul style={{ listStyle: 'none', padding: 0 }}>

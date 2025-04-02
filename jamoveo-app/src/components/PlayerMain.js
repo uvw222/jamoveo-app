@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import socket from '../socket';
 import '../App.css'; 
+
 function PlayerMain() {
   const navigate = useNavigate();
 
@@ -15,21 +16,20 @@ function PlayerMain() {
   
     socket.on('songUpdate', (songData) => {
       console.log('PlayerMain: Received songUpdate:', songData);
+      // Retrieve instrument from sessionStorage (each tab has its own sessionStorage).
       const instrument = sessionStorage.getItem('instrument') || '';
       console.log('players instrument:', instrument);
       navigate('/live', { state: { song: songData, userRole: 'player', instrument } });
     });
     
-  
     return () => {
       console.log('PlayerMain: unmounting, removing songUpdate listener');
       socket.off('songUpdate');
     };
   }, [navigate]);
-  
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '2em' }}>
+    <div className="container">
       <h2>Waiting for next song</h2>
     </div>
   );

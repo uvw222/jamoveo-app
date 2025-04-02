@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../App.css'; 
+
 function Login() {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
@@ -14,7 +15,6 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Call the login API endpoint
       const res = await fetch('https://jamoveo-app-production.up.railway.app/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -25,8 +25,6 @@ function Login() {
         setError(data.error);
       } else {
         console.log('Login successful:', data);
-        // Redirect based on role; here we simply redirect regular users to /player
-        // and admins could be redirected to /admin
         if (data.user.role === 'admin') {
           navigate('/admin');
         } else {
@@ -39,7 +37,7 @@ function Login() {
   };
 
   return (
-    <div style={{ margin: '2em', textAlign: 'center' }}>
+    <div className="container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>

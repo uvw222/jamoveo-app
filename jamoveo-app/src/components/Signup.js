@@ -25,7 +25,6 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate the password.
     if (!isValidPassword(formData.password)) {
       setError('Password must be at least 8 characters long, include at least one capital letter and one symbol.');
       return;
@@ -43,7 +42,7 @@ function Signup() {
         setError(data.error || 'Signup failed');
       } else {
         setMessage(data.message);
-        // Store the user's instrument for later use
+        // Store the user's instrument in sessionStorage so each tab is independent.
         sessionStorage.setItem('instrument', formData.instrument);
       }
     } catch (err) {
