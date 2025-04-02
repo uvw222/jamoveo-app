@@ -1,4 +1,4 @@
-// src/components/AdminMain.js
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,25 +8,24 @@ function AdminMain() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // In a full implementation, you would search your song database (including JSON files).
-    console.log('Admin search query:', query);
-    // For demo purposes, navigate to the results page with the query.
+    // Navigate to the Results page and pass the query in state
     navigate('/results', { state: { query } });
   };
 
   return (
-    <div>
+    <div style={{ textAlign: 'center', marginTop: '2em' }}>
       <h2>Search any song...</h2>
       <form onSubmit={handleSearch}>
-        <input
+        <input 
           type="text"
-          placeholder="Enter song name in English or Hebrew"
+          placeholder="Enter song name or artist"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           required
+          style={{ padding: '0.5em', width: '60%' }}
         />
-        <br />
-        <button type="submit">Search</button>
+        <br /><br />
+        <button type="submit" style={{ padding: '0.5em 1em' }}>Search</button>
       </form>
     </div>
   );
