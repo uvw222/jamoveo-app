@@ -1,27 +1,32 @@
 /* src/App.css */
+
+/* Body styling */
 body {
-  background-color: #f2f2f7; /* Light gray background similar to iOS */
+  background-color: #f5f0ff; /* very light purple background */
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
-  color: #1c1c1e;
+  color: #4c2f91; /* deep violet for text */
 }
 
+/* Container for pages (centered card look) */
 .container {
   margin: 2em auto;
   max-width: 500px;
-  background: #ffffff;
+  background: #fff;
   padding: 2em;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(76, 47, 145, 0.2);
 }
 
+/* Headings */
 h2 {
   font-size: 24px;
   margin-bottom: 0.5em;
-  color: #000;
+  color: #4c2f91;
 }
 
+/* Input and select fields styling */
 input, select {
   width: 90%;
   padding: 12px;
@@ -31,8 +36,9 @@ input, select {
   font-size: 16px;
 }
 
+/* Button styling */
 button {
-  background-color: #007aff;
+  background-color: #6f42c1; /* violet button */
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -44,11 +50,12 @@ button {
 }
 
 button:hover {
-  background-color: #005bb5;
+  background-color: #5a359d; /* darker violet on hover */
 }
 
+/* Links styling */
 a {
-  color: #007aff;
+  color: #6f42c1;
   text-decoration: none;
 }
 
