@@ -1,5 +1,5 @@
 // src/components/Live.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import socket from '../socket';
 
@@ -7,25 +7,25 @@ function Live() {
   const location = useLocation();
   const navigate = useNavigate();
   // Destructure song, userRole, and instrument from navigation state.
-  // Default userRole to 'player' and instrument to an empty string if not provided.
   const { song, userRole = 'player', instrument = '' } = location.state || {};
 
-  // For regular users: if their instrument is "vocals" (ignoring case), then they are considered a singer.
+  // For regular users: if their instrument is "vocals" (ignoring case), then they are a singer.
   const isSinger = (userRole !== 'admin' && instrument.toLowerCase() === 'vocals');
 
   const [autoScroll, setAutoScroll] = useState(false);
+  const contentRef = useRef(null);
+  const scrollIntervalRef = useRef(null);
 
   useEffect(() => {
-    // Listen for further song updates if needed (optional).
+    // Listen for further song updates (optional).
     socket.on('songUpdate', (data) => {
       console.log('Live: Received songUpdate:', data);
-      // You could update the song display dynamically here if needed.
+      // Optionally update song display dynamically.
     });
     
-    // Listen for sessionQuit event from the server.
+    // Listen for sessionQuit event.
     socket.on('sessionQuit', () => {
       console.log('Live: Received sessionQuit event');
-      // Navigate based on role: admins go to /admin; regular users go to /player.
       if (userRole === 'admin') {
         navigate('/admin');
       } else {
@@ -39,15 +39,33 @@ function Live() {
     };
   }, [navigate, userRole]);
 
+  // Auto-scroll effect: start or clear an interval based on autoScroll state.
+  useEffect(() => {
+    if (autoScroll) {
+      // Start scrolling every 50ms by 1 pixel (adjust as needed)
+      scrollIntervalRef.current = setInterval(() => {
+        if (contentRef.current) {
+          contentRef.current.scrollBy({ top: 1, behavior: 'smooth' });
+        }
+      }, 50);
+    } else {
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+      }
+    }
+    return () => {
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+      }
+    };
+  }, [autoScroll]);
+
   const toggleAutoScroll = () => {
     setAutoScroll(!autoScroll);
-    // Implement auto-scroll logic if needed.
   };
 
   const quitSession = () => {
-    // Only admin sees the Quit button.
     socket.emit('quitSession', {});
-    // We wait for the server to broadcast the quit event and handle navigation.
   };
 
   if (!song) {
@@ -58,12 +76,12 @@ function Live() {
     <div style={{ fontSize: '1.5em', backgroundColor: '#fff', color: '#000', padding: '1em' }}>
       <h2>{song.name}</h2>
       <h3>by {song.artist}</h3>
-      <div>
+      {/* Song content container with a ref for scrolling */}
+      <div ref={contentRef} style={{ maxHeight: '70vh', overflowY: 'auto' }}>
         {song.data.map((line, index) => (
           <div key={index}>
             {line.map((word, i) => (
               <span key={i} style={{ marginRight: '0.5em' }}>
-                {/* If user is a singer (instrument "vocals"), show only lyrics; otherwise show lyrics with chords if available */}
                 {isSinger || !word.chords ? word.lyrics : `${word.lyrics} (${word.chords})`}
               </span>
             ))}
