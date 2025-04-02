@@ -1,0 +1,9 @@
+{
+    "build": {
+      "builder": "NIXPACKS",
+      "nixpacksPlan": {
+        "cmd": "cd jamoveo-server && npm install && npm run start"
+      }
+    }
+  }
+  
