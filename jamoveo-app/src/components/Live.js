@@ -42,10 +42,11 @@ function Live() {
   // Auto-scroll effect: start or clear an interval based on autoScroll state.
   useEffect(() => {
     if (autoScroll) {
-      // Start scrolling every 50ms by 1 pixel (adjust as needed)
+      // Start scrolling every 50ms by 5 pixels (increased from 1 for better visibility)
       scrollIntervalRef.current = setInterval(() => {
         if (contentRef.current) {
-          contentRef.current.scrollBy({ top: 1, behavior: 'smooth' });
+          console.log('Scrolling...');
+          contentRef.current.scrollBy({ top: 5, behavior: 'smooth' });
         }
       }, 50);
     } else {
@@ -59,6 +60,7 @@ function Live() {
       }
     };
   }, [autoScroll]);
+  
 
   const toggleAutoScroll = () => {
     setAutoScroll(!autoScroll);
