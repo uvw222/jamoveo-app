@@ -1,6 +1,3 @@
 import { io } from 'socket.io-client';
-
-// Replace 'http://localhost:4000' with your server URL when deployed
-const socket = io('http://localhost:4000');
-
+const socket = io('https://jamoveo-app-production.up.railway.app');
 export default socket;
