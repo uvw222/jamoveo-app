@@ -6,26 +6,26 @@ import socket from '../socket';
 function Live() {
   const location = useLocation();
   const navigate = useNavigate();
-  // Extract song, userRole, and instrument from location.state.
-  // For regular users, instrument is provided; for admin, it may be undefined.
+  // Destructure song, userRole, and instrument from navigation state.
+  // Default userRole to 'player' and instrument to an empty string if not provided.
   const { song, userRole = 'player', instrument = '' } = location.state || {};
-  
-  // For a regular user, if the instrument is 'vocals', they are a singer.
+
+  // For regular users: if their instrument is "vocals" (ignoring case), then they are considered a singer.
   const isSinger = (userRole !== 'admin' && instrument.toLowerCase() === 'vocals');
-  
+
   const [autoScroll, setAutoScroll] = useState(false);
 
   useEffect(() => {
-    // Optional: Listen for additional song updates if needed.
+    // Listen for further song updates if needed (optional).
     socket.on('songUpdate', (data) => {
       console.log('Live: Received songUpdate:', data);
-      // You can update the song dynamically here if desired.
+      // You could update the song display dynamically here if needed.
     });
     
-    // Listen for sessionQuit event broadcast from the server.
+    // Listen for sessionQuit event from the server.
     socket.on('sessionQuit', () => {
       console.log('Live: Received sessionQuit event');
-      // Navigate users to their appropriate main page.
+      // Navigate based on role: admins go to /admin; regular users go to /player.
       if (userRole === 'admin') {
         navigate('/admin');
       } else {
@@ -33,24 +33,21 @@ function Live() {
       }
     });
     
-    // Cleanup listeners on unmount.
     return () => {
       socket.off('songUpdate');
       socket.off('sessionQuit');
     };
   }, [navigate, userRole]);
 
-  // Toggle auto-scroll functionality.
   const toggleAutoScroll = () => {
     setAutoScroll(!autoScroll);
-    // Add your auto-scroll logic if needed.
+    // Implement auto-scroll logic if needed.
   };
 
-  // Quit session handler (for admin only).
   const quitSession = () => {
-    // Emit the quitSession event so all connected clients get notified.
+    // Only admin sees the Quit button.
     socket.emit('quitSession', {});
-    // Optionally, you might navigate immediately, but here we wait for the server broadcast.
+    // We wait for the server to broadcast the quit event and handle navigation.
   };
 
   if (!song) {
@@ -66,6 +63,7 @@ function Live() {
           <div key={index}>
             {line.map((word, i) => (
               <span key={i} style={{ marginRight: '0.5em' }}>
+                {/* If user is a singer (instrument "vocals"), show only lyrics; otherwise show lyrics with chords if available */}
                 {isSinger || !word.chords ? word.lyrics : `${word.lyrics} (${word.chords})`}
               </span>
             ))}
