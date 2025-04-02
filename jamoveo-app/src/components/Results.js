@@ -23,13 +23,14 @@ function Results() {
       song.artist.toLowerCase().includes(query.toLowerCase())
   );
 
-  const handleSelect = (song) => {
-    // Emit the songUpdate event so all connected players receive the selected song
-    socket.emit('songUpdate', song);
+ 
+const handleSelect = (song) => {
+  // Emit the songUpdate event for all connected clients
+  socket.emit('songUpdate', song);
+  // Navigate admin to the live view
+  navigate('/live', { state: { song, userRole: 'admin' } });
+};
 
-    // Optionally, navigate the admin to the Live page
-    navigate('/live', { state: { song, userRole: 'admin' } });
-  };
 
   return (
     <div style={{ textAlign: 'center', marginTop: '2em' }}>

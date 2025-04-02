@@ -1,4 +1,4 @@
-
+// src/components/PlayerMain.js
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import socket from '../socket';
@@ -7,14 +7,17 @@ function PlayerMain() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Listen for songUpdate events emitted by the admin
+    console.log('PlayerMain: Connecting to socket...');
+    socket.on('connect', () => {
+      console.log('PlayerMain: Connected to socket with id', socket.id);
+    });
+
     socket.on('songUpdate', (songData) => {
-      console.log('Song updated:', songData);
-      // When a song is selected, navigate to the Live page
+      console.log('PlayerMain: Received songUpdate:', songData);
+      // Navigate to Live page when a song update is received
       navigate('/live', { state: { song: songData, userRole: 'player' } });
     });
 
-    // Cleanup the event listener when the component unmounts
     return () => {
       socket.off('songUpdate');
     };
