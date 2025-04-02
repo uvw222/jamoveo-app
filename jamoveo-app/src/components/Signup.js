@@ -24,7 +24,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate the password criteria.
+    // Validate the password.
     if (!isValidPassword(formData.password)) {
       setError('Password must be at least 8 characters long, include at least one capital letter and one symbol.');
       return;
@@ -32,7 +32,6 @@ function Signup() {
     setError('');
 
     try {
-      // Replace the URL below with your deployed server URL if needed.
       const res = await fetch('https://jamoveo-app-production.up.railway.app/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -43,6 +42,7 @@ function Signup() {
         setError(data.error || 'Signup failed');
       } else {
         setMessage(data.message);
+        localStorage.setItem('instrument', formData.instrument);
       }
     } catch (err) {
       setError('An error occurred during signup.');
