@@ -42,7 +42,7 @@ function Signup() {
         setError(data.error || 'Signup failed');
       } else {
         setMessage(data.message);
-        localStorage.setItem('instrument', formData.instrument);
+        sessionStorage.setItem('instrument', formData.instrument);
       }
     } catch (err) {
       setError('An error occurred during signup.');
