@@ -76,6 +76,12 @@ function Signup() {
         Already registered?{' '}
         <Link to="/login">Click here to log in</Link>.
       </p>
+      <p>
+        Want to sign up as admin?{' '}
+        <Link to="/admin/signup">
+          <button type="button">Sign Up as Admin</button>
+        </Link>
+      </p>
     </div>
   );
 }
