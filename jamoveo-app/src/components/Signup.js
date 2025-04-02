@@ -2,6 +2,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Validate password: at least 8 characters, one capital letter, one symbol.
+function isValidPassword(password) {
+  const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+  return regex.test(password);
+}
+
 function Signup() {
   const [formData, setFormData] = useState({
     username: '',
@@ -17,8 +23,16 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate password criteria
+    if (!isValidPassword(formData.password)) {
+      setError('Password must be at least 8 characters long, include at least one capital letter and one symbol.');
+      return;
+    }
+    setError('');
+    
     try {
-      // Call the regular user signup API endpoint
+      // Replace the URL below with your deployed server URL if needed.
       const res = await fetch('https://jamoveo-app-production.up.railway.app/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -37,40 +51,45 @@ function Signup() {
 
   return (
     <div style={{ margin: '2em', textAlign: 'center' }}>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input 
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <input 
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <select name="instrument" onChange={handleChange} required>
-            <option value="">Select Instrument</option>
-            <option value="guitar">Guitar</option>
-            <option value="drums">Drums</option>
-            <option value="bass">Bass</option>
-            <option value="saxophone">Saxophone</option>
-            <option value="keyboards">Keyboards</option>
-            <option value="vocals">Vocals</option>
-          </select>
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
-      {message && <p style={{ color: 'green' }}>{message}</p>}
+      {message ? (
+        <p style={{ color: 'green' }}>{message}</p>
+      ) : (
+        <>
+          <h2>Sign Up</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <input 
+                type="text"
+                name="username"
+                placeholder="Username"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <input 
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <select name="instrument" onChange={handleChange} required>
+                <option value="">Select Instrument</option>
+                <option value="guitar">Guitar</option>
+                <option value="drums">Drums</option>
+                <option value="bass">Bass</option>
+                <option value="saxophone">Saxophone</option>
+                <option value="keyboards">Keyboards</option>
+                <option value="vocals">Vocals</option>
+              </select>
+            </div>
+            <button type="submit">Sign Up</button>
+          </form>
+        </>
+      )}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <p>
         Already registered?{' '}
