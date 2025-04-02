@@ -8,6 +8,8 @@ import PlayerMain from './components/PlayerMain';
 import AdminMain from './components/AdminMain';
 import Results from './components/Results';
 import Live from './components/Live';
+import './App.css';
+
 
 function App() {
   return (
