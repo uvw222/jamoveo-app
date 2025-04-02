@@ -1,3 +1,4 @@
+// src/components/Signup.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -7,15 +8,31 @@ function Signup() {
     password: '',
     instrument: ''
   });
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Add your signup logic (API call, etc.)
-    console.log('Signup form submitted:', formData);
+    try {
+      // Call the regular user signup API endpoint
+      const res = await fetch('https://jamoveo-app-production.up.railway.app/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error);
+      } else {
+        setMessage(data.message);
+      }
+    } catch (err) {
+      setError('An error occurred during signup.');
+    }
   };
 
   return (
@@ -53,6 +70,8 @@ function Signup() {
         </div>
         <button type="submit">Sign Up</button>
       </form>
+      {message && <p style={{ color: 'green' }}>{message}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <p>
         Already registered?{' '}
         <Link to="/login">Click here to log in</Link>.
