@@ -1,6 +1,7 @@
 // src/components/Signup.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './App.css'; // Make sure to import the CSS file
 
 // Password validation: at least 8 characters, one uppercase letter, and one symbol.
 const isValidPassword = (password) => {
@@ -42,6 +43,7 @@ function Signup() {
         setError(data.error || 'Signup failed');
       } else {
         setMessage(data.message);
+        // Store the user's instrument for later use
         sessionStorage.setItem('instrument', formData.instrument);
       }
     } catch (err) {
@@ -50,7 +52,7 @@ function Signup() {
   };
 
   return (
-    <div style={{ margin: '2em', textAlign: 'center' }}>
+    <div className="container">
       {message ? (
         <p style={{ color: 'green' }}>{message}</p>
       ) : (
