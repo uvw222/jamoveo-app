@@ -46,7 +46,7 @@ function Live() {
       scrollIntervalRef.current = setInterval(() => {
         if (contentRef.current) {
           console.log('Scrolling...');
-          contentRef.current.scrollBy({ top: 30, behavior: 'smooth' });
+          contentRef.current.scrollBy({ top: 5, behavior: 'smooth' });
         }
       }, 50);
     } else {
