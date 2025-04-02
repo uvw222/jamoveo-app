@@ -26,6 +26,8 @@ function Results() {
  
 const handleSelect = (song) => {
   // Emit the songUpdate event for all connected clients
+  console.log('Admin: Emitting songUpdate:', song);
+
   socket.emit('songUpdate', song);
   // Navigate admin to the live view
   navigate('/live', { state: { song, userRole: 'admin' } });
