@@ -11,14 +11,13 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Signup />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/player" element={<PlayerMain />} />
         <Route path="/admin" element={<AdminMain />} />
         <Route path="/results" element={<Results />} />
         <Route path="/live" element={<Live />} />
-        {/* You can also add a default route */}
-        <Route path="/" element={<Login />} />
       </Routes>
     </Router>
   );
