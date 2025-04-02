@@ -11,7 +11,7 @@ function Live() {
   const { song, userRole = 'player', instrument = '' } = location.state || {};
 
   // For regular users: if their instrument is "vocals" (ignoring case), then they are considered a singer.
-  const isSinger = (userRole !== 'admin' && instrument.toLowerCase() === 'Vocals');
+  const isSinger = (userRole !== 'admin' && instrument.toLowerCase() === 'vocals');
 
   const [autoScroll, setAutoScroll] = useState(false);
 

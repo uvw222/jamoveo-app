@@ -16,6 +16,7 @@ function PlayerMain() {
     socket.on('songUpdate', (songData) => {
       console.log('PlayerMain: Received songUpdate:', songData);
       const instrument = localStorage.getItem('instrument') || '';
+      console.log('players instrument:', instrument);
       navigate('/live', { state: { song: songData, userRole: 'player', instrument } });
     });
     
