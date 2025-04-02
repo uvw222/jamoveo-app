@@ -1,21 +1,22 @@
 // src/components/Results.js
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import socket from '../socket';
 import heyJude from '../songs/hey_jude.json';
 import veechShelo from '../songs/veech_shelo.json';
 
 function Results() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { query } = location.state || { query: '' };
+  const query = location.state?.query || '';
 
-  // For demonstration, combine both song JSON files
+  // Example song data – adjust as needed
   const songs = [
     { id: 1, name: 'Hey Jude', artist: 'The Beatles', data: heyJude },
     { id: 2, name: 'Veech Shelo', artist: 'Artist Unknown', data: veechShelo }
   ];
 
-  // A simple filter based on query (case-insensitive contains)
+  // Filter songs by query (case-insensitive)
   const filteredSongs = songs.filter(
     (song) =>
       song.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -23,23 +24,36 @@ function Results() {
   );
 
   const handleSelect = (song) => {
-    // For demo, navigate to the Live page and send the song data via state.
-    navigate('/live', { state: { song } });
+    // Emit the songUpdate event so all connected players receive the selected song
+    socket.emit('songUpdate', song);
+
+    // Optionally, navigate the admin to the Live page
+    navigate('/live', { state: { song, userRole: 'admin' } });
   };
 
   return (
-    <div>
-      <h2>Search Results</h2>
+    <div style={{ textAlign: 'center', marginTop: '2em' }}>
+      <h2>Search Results for "{query}"</h2>
       {filteredSongs.length > 0 ? (
-        <ul>
+        <ul style={{ listStyle: 'none', padding: 0 }}>
           {filteredSongs.map((song) => (
-            <li key={song.id} onClick={() => handleSelect(song)} style={{cursor:'pointer'}}>
+            <li
+              key={song.id}
+              style={{
+                cursor: 'pointer',
+                padding: '1em',
+                border: '1px solid #ccc',
+                margin: '0.5em auto',
+                width: '50%'
+              }}
+              onClick={() => handleSelect(song)}
+            >
               <strong>{song.name}</strong> by {song.artist}
             </li>
           ))}
         </ul>
       ) : (
-        <p>No results found for "{query}".</p>
+        <p>No results found.</p>
       )}
     </div>
   );
