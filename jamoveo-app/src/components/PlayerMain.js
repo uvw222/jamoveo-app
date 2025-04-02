@@ -15,8 +15,10 @@ function PlayerMain() {
   
     socket.on('songUpdate', (songData) => {
       console.log('PlayerMain: Received songUpdate:', songData);
-      navigate('/live', { state: { song: songData, userRole: 'player' } });
+      const instrument = localStorage.getItem('instrument') || '';
+      navigate('/live', { state: { song: songData, userRole: 'player', instrument } });
     });
+    
   
     return () => {
       console.log('PlayerMain: unmounting, removing songUpdate listener');

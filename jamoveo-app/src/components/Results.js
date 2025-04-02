@@ -23,16 +23,16 @@ function Results() {
       song.artist.toLowerCase().includes(query.toLowerCase())
   );
 
- 
-const handleSelect = (song) => {
-  // Emit the songUpdate event for all connected clients
-  console.log('Admin: Emitting songUpdate:', song);
-
-  socket.emit('songUpdate', song);
-  // Navigate admin to the live view
-  navigate('/live', { state: { song, userRole: 'admin' } });
-};
-
+  const handleSelect = (song) => {
+    // Emit the songUpdate event for all connected clients
+    console.log('Admin: Emitting songUpdate:', song);
+    socket.emit('songUpdate', song);
+    // For consistency, try to pass the instrument from localStorage if available.
+    // (For admin signups, instrument might not be stored; in that case, an empty string is passed.)
+    const instrument = localStorage.getItem('instrument') || '';
+    // Navigate admin to the live view; you can include instrument if needed.
+    navigate('/live', { state: { song, userRole: 'admin', instrument } });
+  };
 
   return (
     <div style={{ textAlign: 'center', marginTop: '2em' }}>
