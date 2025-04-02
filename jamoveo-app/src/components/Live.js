@@ -6,31 +6,51 @@ import socket from '../socket';
 function Live() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { song } = location.state || {};
+  // Extract song, userRole, and instrument from location.state.
+  // For regular users, instrument is provided; for admin, it may be undefined.
+  const { song, userRole = 'player', instrument = '' } = location.state || {};
+  
+  // For a regular user, if the instrument is 'vocals', they are a singer.
+  const isSinger = (userRole !== 'admin' && instrument.toLowerCase() === 'vocals');
+  
   const [autoScroll, setAutoScroll] = useState(false);
-  const userRole = 'player'; // Change this based on your login logic ("admin" or "player")
-  const isSinger = false; // For demo, set to true if the user is a singer
 
   useEffect(() => {
-    // Listen for song updates from the server
+    // Optional: Listen for additional song updates if needed.
     socket.on('songUpdate', (data) => {
-      console.log('Song updated:', data);
-      // Here you can update the displayed song if needed.
+      console.log('Live: Received songUpdate:', data);
+      // You can update the song dynamically here if desired.
     });
+    
+    // Listen for sessionQuit event broadcast from the server.
+    socket.on('sessionQuit', () => {
+      console.log('Live: Received sessionQuit event');
+      // Navigate users to their appropriate main page.
+      if (userRole === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/player');
+      }
+    });
+    
+    // Cleanup listeners on unmount.
     return () => {
       socket.off('songUpdate');
+      socket.off('sessionQuit');
     };
-  }, []);
+  }, [navigate, userRole]);
 
+  // Toggle auto-scroll functionality.
   const toggleAutoScroll = () => {
     setAutoScroll(!autoScroll);
-    // You can add logic here to automatically scroll the page content.
+    // Add your auto-scroll logic if needed.
   };
 
+  // Quit session handler (for admin only).
   const quitSession = () => {
-    // Only admin should be able to quit, here we simply navigate back to the main page.
-    socket.emit('quitSession', {}); // You could broadcast this to all clients.
-    navigate(userRole === 'admin' ? '/admin' : '/player');
+    // Emit the quitSession event so all connected clients get notified.
+    socket.emit('quitSession', {});
+    // Optionally, you might navigate immediately, but here we wait for the server broadcast.
   };
 
   if (!song) {
@@ -52,7 +72,10 @@ function Live() {
           </div>
         ))}
       </div>
-      <button onClick={toggleAutoScroll} style={{ position: 'fixed', bottom: '20px', right: '20px' }}>
+      <button 
+        onClick={toggleAutoScroll} 
+        style={{ position: 'fixed', bottom: '20px', right: '20px' }}
+      >
         {autoScroll ? 'Stop Scrolling' : 'Start Scrolling'}
       </button>
       {userRole === 'admin' && (

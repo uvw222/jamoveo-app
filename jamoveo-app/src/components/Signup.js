@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// Validate password: at least 8 characters, one capital letter, one symbol.
-function isValidPassword(password) {
+// Password validation: at least 8 characters, one uppercase letter, and one symbol.
+const isValidPassword = (password) => {
   const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
   return regex.test(password);
-}
+};
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -23,14 +23,14 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validate password criteria
+
+    // Validate the password criteria.
     if (!isValidPassword(formData.password)) {
       setError('Password must be at least 8 characters long, include at least one capital letter and one symbol.');
       return;
     }
     setError('');
-    
+
     try {
       // Replace the URL below with your deployed server URL if needed.
       const res = await fetch('https://jamoveo-app-production.up.railway.app/api/signup', {
@@ -40,7 +40,7 @@ function Signup() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error);
+        setError(data.error || 'Signup failed');
       } else {
         setMessage(data.message);
       }
