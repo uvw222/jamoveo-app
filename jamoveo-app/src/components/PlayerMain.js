@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import socket from '../socket';
-
+import '../App.css'; 
 function PlayerMain() {
   const navigate = useNavigate();
 

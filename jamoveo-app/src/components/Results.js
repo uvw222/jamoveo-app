@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import socket from '../socket';
 import heyJude from '../songs/hey_jude.json';
 import veechShelo from '../songs/veech_shelo.json';
-
+import '../App.css'; 
 function Results() {
   const location = useLocation();
   const navigate = useNavigate();

@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import socket from '../socket';
+import '../App.css'; 
 
 function Live() {
   const location = useLocation();

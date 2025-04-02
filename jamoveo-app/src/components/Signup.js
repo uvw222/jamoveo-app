@@ -1,7 +1,7 @@
 // src/components/Signup.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css'; // Make sure to import the CSS file
+import '../App.css'; 
 
 // Password validation: at least 8 characters, one uppercase letter, and one symbol.
 const isValidPassword = (password) => {

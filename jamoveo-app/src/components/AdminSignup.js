@@ -1,7 +1,7 @@
 // src/components/AdminSignup.js
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import '../App.css'; 
 // Password validation: at least 8 characters, one uppercase letter, and one symbol.
 const isValidPassword = (password) => {
   const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
