@@ -19,8 +19,9 @@ io.on('connection', (socket) => {
   console.log('New client connected:', socket.id);
 
   // Example: when admin selects a song, broadcast it
-  socket.on('selectSong', (songData) => {
-    console.log('Song selected:', songData);
+  socket.on('songUpdate', (songData) => {
+    console.log('Server received songUpdate:', songData);
+    // Broadcast the event to all clients (including the admin if needed)
     io.emit('songUpdate', songData);
   });
 
