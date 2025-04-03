@@ -1,4 +1,8 @@
-[ [
+{
+    "name": "Hey Jude",
+    "artist": "The Beatles",
+    "language": "en",
+    "data":[ [
     {
         "lyrics": "Hey"
     },
@@ -417,3 +421,4 @@
     }
 ]
 ]
+}

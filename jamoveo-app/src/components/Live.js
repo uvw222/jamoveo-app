@@ -9,8 +9,13 @@ function Live() {
   const location = useLocation();
   const navigate = useNavigate();
   // Destructure song, userRole, and instrument from navigation state.
+  // Make sure your song object includes a property like "language" ("he" for Hebrew, "en" for English).
   const { song, userRole = 'player', instrument = '' } = location.state || {};
-
+  
+  // Determine the language (defaulting to English if not provided)
+  const songLanguage = song?.language || 'en';
+  const isHebrew = songLanguage === 'he';
+  
   // For regular users: if instrument is "vocals", then they're considered a singer.
   const isSinger = (userRole !== 'admin' && instrument.toLowerCase() === 'vocals');
 
@@ -79,7 +84,15 @@ function Live() {
   }
 
   return (
-    <div className="container" style={{ fontSize: '1.5em', padding: '1em', position: 'relative', textAlign: 'center' }}>
+    <div 
+      className="container" 
+      style={{ 
+        fontSize: '1.5em', 
+        padding: '1em', 
+        position: 'relative', 
+        textAlign: isHebrew ? 'right' : 'center' 
+      }}
+    >
       <BurgerMenu />
 
       {/* For admin users, show the Quit button at the top right */}
@@ -107,21 +120,33 @@ function Live() {
       <h2>{song.name}</h2>
       <h3>by {song.artist}</h3>
 
-      {/* Song content container with auto-scroll */}
-      <div ref={contentRef} style={{ maxHeight: '70vh', overflowY: 'auto', marginBottom: '1em' }}>
+      {/* Song content container with auto-scroll.
+          The 'dir' and textAlign change based on the song language */}
+      <div 
+        ref={contentRef} 
+        dir={isHebrew ? 'rtl' : 'ltr'} 
+        style={{ 
+          maxHeight: '70vh', 
+          overflowY: 'auto', 
+          marginBottom: '1em', 
+          textAlign: isHebrew ? 'right' : 'left' 
+        }}
+      >
         {song.data.map((line, index) => {
-          // Determine if this line has any chords.
           const hasChords = line.some(word => word.chords);
           return (
             <div key={index} style={{ marginBottom: '0.5em' }}>
-              {/* If chords exist and the user is not a singer, render chords in a separate row */}
               {hasChords && !isSinger && (
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div style={{ 
+                  display: 'flex', 
+                  justifyContent: isHebrew ? 'flex-end' : 'flex-start' 
+                }}>
                   {line.map((word, i) => (
                     <span
                       key={i}
                       style={{
-                        marginRight: '0.5em',
+                        // For RTL, use marginLeft; for LTR, use marginRight.
+                        margin: isHebrew ? '0 0 0 0.5em' : '0 0.5em 0 0',
                         display: 'inline-block',
                         textAlign: 'center',
                         fontWeight: 'bold',
@@ -133,12 +158,18 @@ function Live() {
                   ))}
                 </div>
               )}
-              {/* Render lyrics row */}
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: isHebrew ? 'flex-end' : 'flex-start' 
+              }}>
                 {line.map((word, i) => (
                   <span 
                     key={i} 
-                    style={{ marginRight: '0.5em', display: 'inline-block', minWidth: '2em' }}
+                    style={{ 
+                      margin: isHebrew ? '0 0 0 0.5em' : '0 0.5em 0 0', 
+                      display: 'inline-block', 
+                      minWidth: '2em' 
+                    }}
                   >
                     {word.lyrics}
                   </span>
@@ -149,7 +180,7 @@ function Live() {
         })}
       </div>
 
-      {/* Smaller auto-scroll toggle button */}
+      {/* Auto-scroll toggle button */}
       <button 
         onClick={toggleAutoScroll} 
         style={{
