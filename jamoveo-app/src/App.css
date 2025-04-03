@@ -27,7 +27,8 @@ h2 {
 }
 
 /* Input and select fields styling */
-input, select {
+input, button, select, textarea {
+  font-family: 'Urbanist', sans-serif !important;
   width: 90%;
   padding: 12px;
   margin: 8px 0;
