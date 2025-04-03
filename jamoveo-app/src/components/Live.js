@@ -72,7 +72,7 @@ function Live() {
   }
 
   return (
-    <div className="container" style={{ fontSize: '1.5em', padding: '1em', position: 'relative' }}>
+    <div className="container" style={{ fontSize: '1.5em', padding: '1em', position: 'relative', width:'50px' }}>
       {/* For admin users, show the Quit button at the top right */}
       {userRole === 'admin' && (
         <button 

@@ -26,7 +26,7 @@ function AdminMain() {
           style={{ padding: '0.5em', width: '60%' }}
         />
         <br /><br />
-        <button type="submit">Search</button>
+        <button type="submit" style={{ width:'50px' }}>Search</button>
       </form>
     </div>
   );
