@@ -82,7 +82,7 @@ function Signup() {
     placeholder="Password"
     onChange={handleChange}
     required
-    style={{ width: '200px', paddingRight: '2.5em' }}
+    style={{ width: '200px', paddingRight: '0.8em' }}
   />
   <span 
     onClick={togglePassword}
@@ -101,7 +101,7 @@ function Signup() {
 </div>
 
             <div>
-              <select name="instrument" onChange={handleChange} required style={{ width: '200px', paddingRight: '0.8em' }}>
+              <select name="instrument" onChange={handleChange} required style={{ width: '225px', paddingRight: '0.8em' }}>
                 <option value="">Select Instrument</option>
                 <option value="guitar">Guitar</option>
                 <option value="drums">Drums</option>
@@ -111,7 +111,7 @@ function Signup() {
                 <option value="vocals">Vocals</option>
               </select>
             </div>
-            <button type="submit">Sign Up</button>
+            <button type="submit" style={{width: '200px', marginLeft: '150px'}}>Sign Up</button>
           </form>
         </>
       )}
@@ -123,7 +123,7 @@ function Signup() {
       <p>
         Want to sign up as admin?{' '}
         <Link to="/admin/signup">
-          <button type="button">Sign Up as Admin</button>
+          <button type="button" style={{width: '200px', marginLeft: '150px'}}>Sign Up as Admin</button>
         </Link>
       </p>
     </div>
