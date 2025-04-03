@@ -70,7 +70,12 @@ function BurgerMenu() {
           </div>
 
           {/* Add spacing so links don't overlap the icon */}
-          <div style={{ marginTop: '3em' }}>
+          <div style={{ 
+  marginTop: '3em', 
+  display: 'flex', 
+  flexDirection: 'column', 
+  gap: '1em' // space between each link 
+}}>
             {/* Always show Home */}
             <Link to="/" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
               Home
