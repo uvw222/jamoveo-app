@@ -32,6 +32,9 @@ function Login() {
         setError(data.error);
       } else {
         console.log('Login successful:', data);
+        // Save the user role in sessionStorage
+        sessionStorage.setItem('userRole', data.user.role);
+        
         if (data.user.role === 'admin') {
           navigate('/admin');
         } else {
@@ -42,6 +45,7 @@ function Login() {
       setError('An error occurred during login.');
     }
   };
+  
 
   return (
     <div className="container">

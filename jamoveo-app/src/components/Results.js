@@ -15,7 +15,7 @@ function Results() {
   // Example song data – adjust as needed
   const songs = [
     { id: 1, name: 'Hey Jude', artist: 'The Beatles', data: heyJude },
-    { id: 2, name: 'Veech Shelo', artist: 'Artist Unknown', data: veechShelo }
+    { id: 2, name: 'ואיך שלא', artist: 'אריאל זילבר', data: veechShelo }
   ];
 
   // Filter songs by query (case-insensitive)
