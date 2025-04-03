@@ -9,7 +9,6 @@ function Live() {
   const location = useLocation();
   const navigate = useNavigate();
   // Destructure song, userRole, and instrument from navigation state.
-  // Make sure your song object includes a property like "language" ("he" for Hebrew, "en" for English).
   const { song, userRole = 'player', instrument = '' } = location.state || {};
   
   // Determine the language (defaulting to English if not provided)
@@ -84,25 +83,18 @@ function Live() {
   }
 
   return (
-    <div 
-      className="container" 
-      style={{ 
-        fontSize: '1.5em', 
-        padding: '1em', 
-        position: 'relative', 
-        textAlign: isHebrew ? 'right' : 'center' 
-      }}
-    >
+    <div className="container" style={{ fontSize: '1.5em', padding: '1em', position: 'relative' }}>
       <BurgerMenu />
 
-      {/* For admin users, show the Quit button at the top right */}
+      {/* Quit button (kept at top right for LTR and top left for RTL) */}
       {userRole === 'admin' && (
         <button 
           onClick={quitSession} 
           style={{
             position: 'absolute',
             top: '10px',
-            right: '10px',
+            right: isHebrew ? 'auto' : '10px',
+            left: isHebrew ? '10px' : 'auto',
             padding: '8px 12px',
             fontSize: '0.9em',
             backgroundColor: '#4c2f91',
@@ -117,8 +109,11 @@ function Live() {
         </button>
       )}
 
-      <h2>{song.name}</h2>
-      <h3>by {song.artist}</h3>
+      {/* Header container with centered headlines */}
+      <div style={{ marginTop: '50px', textAlign: 'center' }}>
+        <h2>{song.name}</h2>
+        <h3>by {song.artist}</h3>
+      </div>
 
       {/* Song content container with auto-scroll.
           The 'dir' and textAlign change based on the song language */}
@@ -145,7 +140,6 @@ function Live() {
                     <span
                       key={i}
                       style={{
-                        // For RTL, use marginLeft; for LTR, use marginRight.
                         margin: isHebrew ? '0 0 0 0.5em' : '0 0.5em 0 0',
                         display: 'inline-block',
                         textAlign: 'center',
