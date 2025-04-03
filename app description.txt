@@ -1,0 +1,8 @@
+JaMoveo App Description
+
+JaMoveo is a full‑stack web application built to enhance band rehearsals by enabling real‑time collaboration and song sharing among members. The app presents a modern, phone music player–inspired design where visitors begin at a home page. By clicking “Start,” users are directed to sign up or log in. Once authenticated, a side menu (burger menu) provides role-based navigation—regular users access the Player page, while administrators have access to dedicated pages such as Admin and Results.
+
+The application uses a static JSON file as its songs database. When an admin selects a song from the search results, the song’s chords and lyrics are broadcast in real time via Socket.IO. The live session intelligently displays content: vocalists see only the lyrics, whereas other musicians see both chords and lyrics.
+
+The client is built with React and deployed on Vercel, and the server (using Node.js, Express, and Socket.IO) is hosted on Railway. Together, these technologies deliver a responsive, interactive, and visually engaging experience that can be easily shared with band members and collaborators.
+
