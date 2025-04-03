@@ -21,7 +21,7 @@ function LandingPage() {
       height: '100vh',
       // Dark purple gradient background
       background: 'linear-gradient(135deg, #3a0f65, #6f42c1)',
-      fontFamily: 'Arial, sans-serif'
+      
     }}>
       <div style={{
         // Semi-transparent white container
@@ -50,7 +50,7 @@ function LandingPage() {
         <h3 style={{ margin: '0', fontSize: '1.3em', color: '#4c2f91' }}>Now Playing</h3>
         <h5 style={{ margin: '15px 0 0px', fontSize: '0.9em', color: '#6f42c1' }}>JaMoveo</h5>
         <p style={{ fontSize: '0.9em', marginBottom: '10px', color: '#6f42c1' }}>
-          Join live rehearsals with synced chords & lyrics.
+          Join live rehearsals with work colleagues while using synced chords and lyrics.
         </p>
 
         {/* Playback Controls with Play Button */}

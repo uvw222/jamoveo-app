@@ -79,7 +79,9 @@ function Login() {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit" style={{ marginLeft: '20px' }}>
+  Log In
+</button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <p>
