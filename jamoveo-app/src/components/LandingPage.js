@@ -15,15 +15,6 @@ function LandingPage() {
         <p style={{ fontSize: '1.2em', maxWidth: '600px' }}>
           Play together — wherever you are. JaMoveo lets you join real-time rehearsal sessions with your team and see lyrics or chords, depending on your instrument.
         </p>
-        <div>
-          <Link to="/login">
-            <button type="button">Log In</button>
-          </Link>
-          <span style={{ margin: '0 1em' }}>or</span>
-          <Link to="/signup">
-            <button type="button">Sign Up</button>
-          </Link>
-        </div>
       </div>
 
       {/* How It Works */}
@@ -33,16 +24,10 @@ function LandingPage() {
           <li><strong>Register</strong> and select the instrument you play.</li>
           <li><strong>Join a rehearsal session</strong> from your phone or desktop.</li>
           <li><strong>See chords or lyrics</strong> depending on your role, synced live by the admin.</li>
+          <li><strong>Admin Controls</strong> Admin users can create sessions, search for songs in English or Hebrew, and control what’s displayed to each musician.</li>
         </ol>
       </div>
 
-      {/* Admin Feature Section */}
-      <div style={{ marginTop: '4em', backgroundColor: '#f5f5f5', padding: '2em', borderRadius: '12px' }}>
-        <h2>Admin Controls</h2>
-        <p style={{ maxWidth: '600px', margin: '1em auto' }}>
-          Admin users can create sessions, search for songs in English or Hebrew, and control what’s displayed to each musician.
-        </p>
-      </div>
 
       {/* Final CTA */}
       <div style={{ marginTop: '4em' }}>
