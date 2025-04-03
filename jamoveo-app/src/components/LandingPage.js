@@ -48,8 +48,8 @@ function LandingPage() {
 
         {/* Text */}
         <h3 style={{ margin: '0', fontSize: '1.3em', color: '#4c2f91' }}>Now Playing</h3>
-        <p style={{ margin: '5px 0 15px', fontSize: '0.9em', color: '#6f42c1' }}>JaMoveo</p>
-        <p style={{ fontSize: '0.8em', marginBottom: '20px', color: '#6f42c1' }}>
+        <h5 style={{ margin: '15px 0 0px', fontSize: '0.9em', color: '#6f42c1' }}>JaMoveo</h5>
+        <p style={{ fontSize: '0.9em', marginBottom: '10px', color: '#6f42c1' }}>
           Join live rehearsals with synced chords & lyrics.
         </p>
 
@@ -77,7 +77,7 @@ function LandingPage() {
 
         {/* Progress Bar (visual only) */}
         <div style={{ marginTop: '20px' }}>
-          <input type="range" value="25" disabled style={{ width: '100%' }} />
+          <input type="range" value="25" disabled style={{ width: '90%' }} />
           <div style={{ fontSize: '0.7em', display: 'flex', justifyContent: 'space-between', color: '#aaa' }}>
             <span>00:25</span>
             <span>02:30</span>
