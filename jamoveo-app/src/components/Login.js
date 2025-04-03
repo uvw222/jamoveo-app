@@ -53,7 +53,7 @@ function Login() {
             placeholder="Username"
             onChange={handleChange}
             required
-            style={{ width: '200px', padding: '2.5em' }}
+            style={{ width: '200px', padding: '0.8em' }}
           />
         </div>
         <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -63,7 +63,7 @@ function Login() {
             placeholder="Password"
             onChange={handleChange}
             required
-            style={{ width: '200px', paddingRight: '2.5em' }}
+            style={{ width: '200px', paddingRight: '0.8em' }}
           />
           <span 
             onClick={togglePassword}
@@ -80,7 +80,7 @@ function Login() {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>
-        <button type="submit" style={{ marginLeft: '50px' }}>
+        <button type="submit" style={{ width: '100px', marginLeft: '50px' }}>
   Log In
 </button>
       </form>
