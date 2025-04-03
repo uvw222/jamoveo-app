@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
 
 // Password validation: at least 8 characters, one uppercase letter, and one symbol.
 const isValidPassword = (password) => {
@@ -70,33 +72,36 @@ function Signup() {
                 placeholder="Username"
                 onChange={handleChange}
                 required
+                style={{ width: '200px', paddingRight: '0.8em' }}
               />
             </div>
             <div style={{ position: 'relative', display: 'inline-block' }}>
-              <input 
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="Password"
-                onChange={handleChange}
-                required
-                style={{ paddingRight: '2.5em' }}
-              />
-              <span 
-                onClick={togglePassword}
-                style={{
-                  position: 'absolute',
-                  right: '0.5em',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  cursor: 'pointer',
-                  userSelect: 'none'
-                }}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </span>
-            </div>
+  <input 
+    type={showPassword ? "text" : "password"}
+    name="password"
+    placeholder="Password"
+    onChange={handleChange}
+    required
+    style={{ width: '200px', paddingRight: '2.5em' }}
+  />
+  <span 
+    onClick={togglePassword}
+    style={{
+      position: 'absolute',
+      right: '0.5em',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      cursor: 'pointer',
+      userSelect: 'none',
+      fontSize: '1.2em'
+    }}
+  >
+    {showPassword ? <FaEyeSlash /> : <FaEye />}
+  </span>
+</div>
+
             <div>
-              <select name="instrument" onChange={handleChange} required>
+              <select name="instrument" onChange={handleChange} required style={{ width: '200px', paddingRight: '0.8em' }}>
                 <option value="">Select Instrument</option>
                 <option value="guitar">Guitar</option>
                 <option value="drums">Drums</option>
