@@ -39,7 +39,7 @@ JaMoveo is a full‑stack web application built to enhance band rehearsals by en
 
 ## Deployment
 
-- **Client:** [https://jamoveo-app.vercel.app](https://jamoveo-app.vercel.app)  
+- **Client:** [https://jamoveo-app-nine.vercel.app](https://jamoveo-app-nine.vercel.app)
 - **Server:** Hosted on Railway
 
 ---
