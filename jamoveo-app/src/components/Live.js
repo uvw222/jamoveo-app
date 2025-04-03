@@ -109,15 +109,44 @@ function Live() {
 
       {/* Song content container with auto-scroll */}
       <div ref={contentRef} style={{ maxHeight: '70vh', overflowY: 'auto', marginBottom: '1em' }}>
-        {song.data.map((line, index) => (
-          <div key={index}>
-            {line.map((word, i) => (
-              <span key={i} style={{ marginRight: '0.5em' }}>
-                {isSinger || !word.chords ? word.lyrics : `${word.lyrics} (${word.chords})`}
-              </span>
-            ))}
-          </div>
-        ))}
+        {song.data.map((line, index) => {
+          // Determine if this line has any chords.
+          const hasChords = line.some(word => word.chords);
+          return (
+            <div key={index} style={{ marginBottom: '0.5em' }}>
+              {/* If chords exist and the user is not a singer, render chords in a separate row */}
+              {hasChords && !isSinger && (
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  {line.map((word, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        marginRight: '0.5em',
+                        display: 'inline-block',
+                        textAlign: 'center',
+                        fontWeight: 'bold',
+                        minWidth: '2em'
+                      }}
+                    >
+                      {word.chords || ' '}
+                    </span>
+                  ))}
+                </div>
+              )}
+              {/* Render lyrics row */}
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                {line.map((word, i) => (
+                  <span 
+                    key={i} 
+                    style={{ marginRight: '0.5em', display: 'inline-block', minWidth: '2em' }}
+                  >
+                    {word.lyrics}
+                  </span>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Smaller auto-scroll toggle button */}
