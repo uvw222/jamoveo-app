@@ -1,48 +1,81 @@
 // src/components/LandingPage.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
-import rehearsalImage from '../assets/rehearsal-illustration.png'; // make sure you import your generated image
+import bannerImage from '../assets/rehearsal-illustration.png'; // replace with your purple band banner
 
 function LandingPage() {
+  const navigate = useNavigate();
+
+  const handlePlayClick = () => {
+    navigate('/signup');
+  };
+
   return (
-    <div className="container" style={{ textAlign: 'center', padding: '3em 1em', maxWidth: '900px', margin: 'auto' }}>
-      
-      {/* Hero Section */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2em' }}>
-        <img src={rehearsalImage} alt="Band rehearsal illustration" style={{ maxWidth: '100%', borderRadius: '12px' }} />
-        <h1>Welcome to JaMoveo</h1>
-        <p style={{ fontSize: '1.2em', maxWidth: '600px' }}>
-          Play together — wherever you are. JaMoveo lets you join real-time rehearsal sessions with your team and see lyrics or chords, depending on your instrument.
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+      backgroundColor: '#f9f5ff',
+      fontFamily: 'Arial, sans-serif'
+    }}>
+      <div style={{
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        borderRadius: '20px',
+        width: '360px',
+        padding: '20px',
+        color: 'white',
+        textAlign: 'center',
+        boxShadow: '0 8px 16px rgba(0,0,0,0.2)'
+      }}>
+        {/* Album Art */}
+        <img
+          src={bannerImage}
+          alt="Rehearsing band"
+          style={{
+            width: '100%',
+            height: '180px',
+            objectFit: 'cover',
+            borderRadius: '12px',
+            marginBottom: '15px'
+          }}
+        />
+
+        {/* Text */}
+        <h3 style={{ margin: '0', fontSize: '1.3em' }}>Now Playing</h3>
+        <p style={{ margin: '5px 0 15px', fontSize: '0.9em', color: '#ccc' }}>JaMoveo</p>
+        <p style={{ fontSize: '0.8em', marginBottom: '20px', color: '#ddd' }}>
+          Join live rehearsals with synced chords & lyrics.
         </p>
+
+        {/* Playback Controls */}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
+          <button disabled style={iconButtonStyle}>⏮</button>
+          <button onClick={handlePlayClick} style={{ ...iconButtonStyle, fontSize: '1.5em' }}>►</button>
+          <button disabled style={iconButtonStyle}>⏭</button>
+        </div>
+
+        {/* Progress Bar (visual only) */}
+        <div style={{ marginTop: '20px' }}>
+          <input type="range" value="25" disabled style={{ width: '100%' }} />
+          <div style={{ fontSize: '0.7em', display: 'flex', justifyContent: 'space-between', color: '#aaa' }}>
+            <span>00:25</span>
+            <span>02:30</span>
+          </div>
+        </div>
       </div>
-
-      {/* How It Works */}
-      <div style={{ marginTop: '4em', textAlign: 'left' }}>
-        <h2 style={{ textAlign: 'center' }}>How It Works</h2>
-        <ol style={{ fontSize: '1em', lineHeight: '1.8em', maxWidth: '600px', margin: 'auto' }}>
-          <li><strong>Register</strong> and select the instrument you play.</li>
-          <li><strong>Join a rehearsal session</strong> from your phone or desktop.</li>
-          <li><strong>See chords or lyrics</strong> depending on your role, synced live by the admin.</li>
-          <li><strong>Admin Controls</strong> Admin users can create sessions, search for songs in English or Hebrew, and control what’s displayed to each musician.</li>
-        </ol>
-      </div>
-
-
-      {/* Final CTA */}
-      <div style={{ marginTop: '4em' }}>
-        <h3>Ready to jam with your team?</h3>
-        <Link to="/signup">
-          <button type="button" style={{ marginTop: '1em' }}>Get Started</button>
-        </Link>
-      </div>
-
-      {/* Footer */}
-      <footer style={{ marginTop: '4em', fontSize: '0.8em', color: '#777' }}>
-        <p>© {new Date().getFullYear()} JaMoveo | Built for Moveo's music lovers</p>
-      </footer>
     </div>
   );
 }
+
+const iconButtonStyle = {
+  background: 'none',
+  border: 'none',
+  color: 'white',
+  fontSize: '1.2em',
+  cursor: 'pointer',
+  opacity: 0.8
+};
 
 export default LandingPage;
