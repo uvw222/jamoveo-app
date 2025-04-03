@@ -60,11 +60,11 @@ function Signup() {
     <div className="container">
       {message ? (
         <>
-          <p style={{ color: 'green' }}>{message}</p>
-          <p>
-            Want to log in now?{' '}
-            <Link to="/login">Log In</Link>
-          </p>
+          <h2>{message}</h2>
+          <p>Do you want to log in?</p>
+          <Link to="/login">
+            <button type="button">Log In</button>
+          </Link>
         </>
       ) : (
         <>
@@ -87,7 +87,7 @@ function Signup() {
                 placeholder="Password"
                 onChange={handleChange}
                 required
-                style={{ width: '200px', paddingRight: '0.8em' }}
+                style={{ width: '200px', paddingRight: '2.5em' }}
               />
               <span 
                 onClick={togglePassword}

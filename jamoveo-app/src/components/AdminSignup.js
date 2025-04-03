@@ -1,6 +1,7 @@
 // src/components/AdminSignup.js
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '../App.css'; 
 
 // Password validation: at least 8 characters, one uppercase letter, and one symbol.
@@ -80,7 +81,7 @@ function AdminSignup() {
                 placeholder="Password"
                 onChange={handleChange}
                 required
-                style={{ width: '200px', paddingRight: '0.8em' }}
+                style={{ width: '200px', paddingRight: '2.5em' }}
               />
               <span 
                 onClick={() => setShowPassword(!showPassword)}
@@ -89,10 +90,13 @@ function AdminSignup() {
                   right: '0.5em',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  userSelect: 'none',
+                  fontSize: '1.2em',
+                  color: '#4c2f91'
                 }}
               >
-                {showPassword ? "Hide" : "Show"}
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
             <button type="submit" style={{ width: '200px', marginLeft: '150px' }}>Sign Up as Admin</button>
