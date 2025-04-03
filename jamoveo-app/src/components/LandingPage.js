@@ -21,13 +21,14 @@ function LandingPage() {
       height: '100vh',
       // Dark purple gradient background
       background: 'linear-gradient(135deg, #3a0f65, #6f42c1)',
-      
+      padding: '1em'
     }}>
       <div style={{
         // Semi-transparent white container
         backgroundColor: 'rgba(255, 255, 255, 0.9)',
         borderRadius: '20px',
         width: '360px',
+        maxWidth: '100%',
         padding: '20px',
         color: '#4c2f91',
         textAlign: 'center',
