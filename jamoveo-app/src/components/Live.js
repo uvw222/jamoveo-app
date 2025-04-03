@@ -124,7 +124,10 @@ function Live() {
           border: 'none',
           color: '#fff',
           cursor: 'pointer',
-          fontSize: '0.8em'
+          fontSize: '0.8em',
+          display: 'flex',           
+    justifyContent: 'center',  
+    alignItems: 'center'
         }}
       >
         {autoScroll ? 'Stop' : 'Go'}
