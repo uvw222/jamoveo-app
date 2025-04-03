@@ -49,9 +49,12 @@ function LandingPage() {
 
         {/* Text */}
         <h3 style={{ margin: '0', fontSize: '1.3em', color: '#4c2f91' }}>Now Playing</h3>
-        <h5 style={{ margin: '15px 0 0px', fontSize: '0.9em', color: '#6f42c1' }}>JaMoveo</h5>
+        <h5 style={{ margin: '15px 0 0px', fontSize: '1em', color: '#6f42c1' }}>JaMoveo</h5>
         <p style={{ fontSize: '0.9em', marginBottom: '10px', color: '#6f42c1' }}>
           Join live rehearsals with work colleagues while using synced chords and lyrics.
+        </p>
+        <p style={{ fontSize: '0.9em', marginBottom: '10px', color: '#4c2f91' }}>
+          Click here to start
         </p>
 
         {/* Playback Controls with Play Button */}
