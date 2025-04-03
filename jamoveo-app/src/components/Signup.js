@@ -87,7 +87,7 @@ function Signup() {
                 placeholder="Password"
                 onChange={handleChange}
                 required
-                style={{ width: '200px', paddingRight: '2.5em' }}
+                style={{ width: '200px', paddingRight: '0.8em' }}
               />
               <span 
                 onClick={togglePassword}
