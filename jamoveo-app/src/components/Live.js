@@ -73,7 +73,7 @@ function Live() {
   }
 
   return (
-    <div className="container" style={{ fontSize: '1.5em', padding: '1em', position: 'relative', width:'50px' }}>
+    <div className="container" style={{ fontSize: '1.5em', padding: '1em', position: 'relative', width:'1000px' }}>
       <BurgerMenu />
       {/* For admin users, show the Quit button at the top right */}
       {userRole === 'admin' && (
@@ -89,7 +89,8 @@ function Live() {
             color: '#fff',
             border: 'none',
             borderRadius: '8px',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            width: '80px'
           }}
         >
           Quit

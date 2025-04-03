@@ -42,7 +42,22 @@ function BurgerMenu() {
           display: 'flex',
           flexDirection: 'column',
           gap: '1em'
-        }}>
+        }}> 
+        {/* Close icon at the top right of the menu */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <button
+            onClick={toggleMenu}
+            style={{
+              background: 'none',
+              border: 'none',
+              fontSize: '1.8em',
+              color: 'white',
+              cursor: 'pointer'
+            }}
+          >
+            <FaTimes />
+          </button>
+        </div>
           <Link to="/" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
             Home
           </Link>
