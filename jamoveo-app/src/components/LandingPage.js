@@ -21,13 +21,13 @@ function LandingPage() {
       fontFamily: 'Arial, sans-serif'
     }}>
       <div style={{
-        backgroundColor: 'rgba(0,0,0,0.6)',
+        backgroundColor: 'rgba(168, 165, 165, 0.6)',
         borderRadius: '20px',
         width: '360px',
         padding: '20px',
         color: 'white',
         textAlign: 'center',
-        boxShadow: '0 8px 16px rgba(0,0,0,0.2)'
+        boxShadow: '0 8px 16px rgba(93, 91, 91, 0.2)'
       }}>
         {/* Album Art */}
         <img
@@ -51,9 +51,9 @@ function LandingPage() {
 
         {/* Playback Controls */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
-          <button disabled style={iconButtonStyle}>⏮</button>
+          
           <button onClick={handlePlayClick} style={{ ...iconButtonStyle, fontSize: '1.5em' }}>►</button>
-          <button disabled style={iconButtonStyle}>⏭</button>
+          
         </div>
 
         {/* Progress Bar (visual only) */}
