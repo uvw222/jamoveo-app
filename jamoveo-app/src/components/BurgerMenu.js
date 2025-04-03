@@ -19,21 +19,23 @@ function BurgerMenu() {
 
   return (
     <div>
-      {/* Burger icon in the top left */}
-      <div style={{ position: 'fixed', top: '10px', left: '10px', zIndex: '1000' }}>
-        <button 
-          onClick={toggleMenu}
-          style={{
-            background: 'none',
-            border: 'none',
-            fontSize: '1.8em',
-            color: '#4c2f91',
-            cursor: 'pointer'
-          }}
-        >
-          {open ? <FaTimes /> : <FaBars />}
-        </button>
-      </div>
+      {/* Burger icon in the top left (only when menu is closed) */}
+      {!open && (
+        <div style={{ position: 'fixed', top: '10px', left: '10px', zIndex: '1000' }}>
+          <button 
+            onClick={toggleMenu}
+            style={{
+              background: 'none',
+              border: 'none',
+              fontSize: '1.8em',
+              color: '#4c2f91',
+              cursor: 'pointer'
+            }}
+          >
+            <FaBars />
+          </button>
+        </div>
+      )}
 
       {/* Floating menu */}
       {open && (
@@ -52,7 +54,7 @@ function BurgerMenu() {
           gap: '1em'
         }}>
           {/* Close (X) icon at the top right of the menu */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
             <button
               onClick={toggleMenu}
               style={{
@@ -66,48 +68,50 @@ function BurgerMenu() {
               <FaTimes />
             </button>
           </div>
-          {/* Always show Home */}
-          <Link to="/" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
-            Home
-          </Link>
 
-          {/* If not logged in, show Sign Up and Log In */}
-          {!userRole && (
-            <>
-              <Link to="/signup" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
-                Sign Up
-              </Link>
-              <Link to="/login" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
-                Log In
-              </Link>
-            </>
-          )}
+          {/* Add spacing so links don't overlap the icon */}
+          <div style={{ marginTop: '3em' }}>
+            {/* Always show Home */}
+            <Link to="/" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
+              Home
+            </Link>
 
-          {/* If logged in as a regular user */}
-          {userRole === 'player' && (
-            <>
+            {/* If not logged in, show Sign Up and Log In */}
+            {!userRole && (
+              <>
+                <Link to="/signup" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
+                  Sign Up
+                </Link>
+                <Link to="/login" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
+                  Log In
+                </Link>
+              </>
+            )}
+
+            {/* If logged in as a regular user */}
+            {userRole === 'player' && (
               <Link to="/player" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
                 Player
               </Link>
-            </>
-          )}
+            )}
 
-          {/* If logged in as admin */}
-          {userRole === 'admin' && (
-            <>
-              <Link to="/admin" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
-                Admin
-              </Link>
-              <Link to="/results" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
-                Results
-              </Link>
-            </>
-          )}
+            {/* If logged in as admin */}
+            {userRole === 'admin' && (
+              <>
+                <Link to="/admin" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
+                  Admin
+                </Link>
+                <Link to="/results" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
+                  Results
+                </Link>
+              </>
+            )}
 
-          {/* Live is common */}
-          <Link to="/live" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
-            Live
-          </Link>
+            {/* Live is common */}
+            <Link to="/live" onClick={toggleMenu} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2em' }}>
+              Live
+            </Link>
+          </div>
         </div>
       )}
     </div>
