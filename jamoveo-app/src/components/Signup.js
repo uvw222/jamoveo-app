@@ -1,7 +1,7 @@
 // src/components/Signup.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css'; 
+import '../App.css';
 
 // Password validation: at least 8 characters, one uppercase letter, and one symbol.
 const isValidPassword = (password) => {
@@ -17,9 +17,14 @@ function Signup() {
   });
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
   };
 
   const handleSubmit = async (e) => {
@@ -67,14 +72,28 @@ function Signup() {
                 required
               />
             </div>
-            <div>
+            <div style={{ position: 'relative', display: 'inline-block' }}>
               <input 
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Password"
                 onChange={handleChange}
                 required
+                style={{ paddingRight: '2.5em' }}
               />
+              <span 
+                onClick={togglePassword}
+                style={{
+                  position: 'absolute',
+                  right: '0.5em',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  cursor: 'pointer',
+                  userSelect: 'none'
+                }}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </span>
             </div>
             <div>
               <select name="instrument" onChange={handleChange} required>

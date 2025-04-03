@@ -6,10 +6,15 @@ import '../App.css';
 function Login() {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
   };
 
   const handleSubmit = async (e) => {
@@ -49,14 +54,28 @@ function Login() {
             required
           />
         </div>
-        <div>
+        <div style={{ position: 'relative', display: 'inline-block' }}>
           <input 
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
             onChange={handleChange}
             required
+            style={{ paddingRight: '2.5em' }}
           />
+          <span 
+            onClick={togglePassword}
+            style={{
+              position: 'absolute',
+              right: '0.5em',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              cursor: 'pointer',
+              userSelect: 'none'
+            }}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </span>
         </div>
         <button type="submit">Log In</button>
       </form>

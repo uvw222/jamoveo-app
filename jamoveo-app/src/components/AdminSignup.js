@@ -13,6 +13,7 @@ function AdminSignup() {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -71,14 +72,27 @@ function AdminSignup() {
                 required
               />
             </div>
-            <div>
+            <div style={{ position: 'relative', display: 'inline-block' }}>
               <input 
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Password"
                 onChange={handleChange}
                 required
+                style={{ paddingRight: '2.5em' }}
               />
+              <span 
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: 'absolute',
+                  right: '0.5em',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  cursor: 'pointer'
+                }}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </span>
             </div>
             <button type="submit">Sign Up as Admin</button>
           </form>
