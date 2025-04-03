@@ -21,7 +21,7 @@ function Live() {
   useEffect(() => {
     socket.on('songUpdate', (data) => {
       console.log('Live: Received songUpdate:', data);
-      // Optionally update song display dynamically here.
+      // Optionally update the displayed song here if you want dynamic changes.
     });
     
     socket.on('sessionQuit', () => {
@@ -41,7 +41,7 @@ function Live() {
 
   useEffect(() => {
     if (autoScroll) {
-      // Scroll every 50ms by 2 pixels (slower scrolling)
+      // Scroll every 50ms by 2 pixels (slower scrolling).
       scrollIntervalRef.current = setInterval(() => {
         if (contentRef.current) {
           console.log('Scrolling...');
@@ -68,13 +68,20 @@ function Live() {
     socket.emit('quitSession', {});
   };
 
+  // If no song is selected, show a centered message with the burger menu still visible.
   if (!song) {
-    return <p>No song selected.</p>;
+    return (
+      <div className="container" style={{ textAlign: 'center', marginTop: '2em' }}>
+        <BurgerMenu />
+        <h2>No song selected.</h2>
+      </div>
+    );
   }
 
   return (
-    <div className="container" style={{ fontSize: '1.5em', padding: '1em', position: 'relative', width:'1000px' }}>
+    <div className="container" style={{ fontSize: '1.5em', padding: '1em', position: 'relative', textAlign: 'center' }}>
       <BurgerMenu />
+
       {/* For admin users, show the Quit button at the top right */}
       {userRole === 'admin' && (
         <button 
@@ -96,8 +103,10 @@ function Live() {
           Quit
         </button>
       )}
+
       <h2>{song.name}</h2>
       <h3>by {song.artist}</h3>
+
       {/* Song content container with auto-scroll */}
       <div ref={contentRef} style={{ maxHeight: '70vh', overflowY: 'auto', marginBottom: '1em' }}>
         {song.data.map((line, index) => (
@@ -110,6 +119,7 @@ function Live() {
           </div>
         ))}
       </div>
+
       {/* Smaller auto-scroll toggle button */}
       <button 
         onClick={toggleAutoScroll} 
@@ -125,9 +135,9 @@ function Live() {
           color: '#fff',
           cursor: 'pointer',
           fontSize: '0.8em',
-          display: 'flex',           
-    justifyContent: 'center',  
-    alignItems: 'center'
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
       >
         {autoScroll ? 'Stop' : 'Go'}
