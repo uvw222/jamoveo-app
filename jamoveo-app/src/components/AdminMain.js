@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css'; 
+import BurgerMenu from './BurgerMenu';
 
 function AdminMain() {
   const [query, setQuery] = useState('');
@@ -15,6 +16,7 @@ function AdminMain() {
 
   return (
     <div className="container">
+      <BurgerMenu />
       <h2>Search any song...</h2>
       <form onSubmit={handleSearch}>
         <input 

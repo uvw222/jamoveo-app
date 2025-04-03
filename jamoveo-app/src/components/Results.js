@@ -5,6 +5,7 @@ import socket from '../socket';
 import heyJude from '../songs/hey_jude.json';
 import veechShelo from '../songs/veech_shelo.json';
 import '../App.css'; 
+import BurgerMenu from './BurgerMenu';
 
 function Results() {
   const location = useLocation();
@@ -33,6 +34,7 @@ function Results() {
 
   return (
     <div className="container">
+      <BurgerMenu />
       <h2>Search Results for "{query}"</h2>
       {filteredSongs.length > 0 ? (
         <ul style={{ listStyle: 'none', padding: 0 }}>

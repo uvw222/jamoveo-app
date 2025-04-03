@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '../App.css'; 
+import BurgerMenu from './BurgerMenu';
 
 function Login() {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -44,6 +45,7 @@ function Login() {
 
   return (
     <div className="container">
+      <BurgerMenu />
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>

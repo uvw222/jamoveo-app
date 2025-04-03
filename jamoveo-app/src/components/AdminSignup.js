@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '../App.css'; 
+import BurgerMenu from './BurgerMenu';
 
 // Password validation: at least 8 characters, one uppercase letter, and one symbol.
 const isValidPassword = (password) => {
@@ -52,6 +53,7 @@ function AdminSignup() {
 
   return (
     <div className="container">
+      <BurgerMenu />
       {message ? (
         <>
           <h2>{message}</h2>

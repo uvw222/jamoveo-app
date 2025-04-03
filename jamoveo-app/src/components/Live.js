@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import socket from '../socket';
 import '../App.css'; 
+import BurgerMenu from './BurgerMenu';
 
 function Live() {
   const location = useLocation();
@@ -73,6 +74,7 @@ function Live() {
 
   return (
     <div className="container" style={{ fontSize: '1.5em', padding: '1em', position: 'relative', width:'50px' }}>
+      <BurgerMenu />
       {/* For admin users, show the Quit button at the top right */}
       {userRole === 'admin' && (
         <button 

@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import socket from '../socket';
 import '../App.css'; 
+import BurgerMenu from './BurgerMenu';
 
 function PlayerMain() {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ function PlayerMain() {
 
   return (
     <div className="container">
+      <BurgerMenu />
       <h2>Waiting for next song</h2>
     </div>
   );
