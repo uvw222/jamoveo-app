@@ -70,6 +70,7 @@ function AdminSignup() {
                 placeholder="Admin Username"
                 onChange={handleChange}
                 required
+                style={{ width: '200px', paddingRight: '0.8em' }}
               />
             </div>
             <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -79,7 +80,7 @@ function AdminSignup() {
                 placeholder="Password"
                 onChange={handleChange}
                 required
-                style={{ paddingRight: '2.5em' }}
+                style={{ width: '200px', paddingRight: '0.8em' }}
               />
               <span 
                 onClick={() => setShowPassword(!showPassword)}
@@ -94,7 +95,7 @@ function AdminSignup() {
                 {showPassword ? "Hide" : "Show"}
               </span>
             </div>
-            <button type="submit">Sign Up as Admin</button>
+            <button type="submit" style={{ width: '200px', marginLeft: '150px' }}>Sign Up as Admin</button>
           </form>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <p>

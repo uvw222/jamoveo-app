@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-
 // Password validation: at least 8 characters, one uppercase letter, and one symbol.
 const isValidPassword = (password) => {
   const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
@@ -60,7 +59,13 @@ function Signup() {
   return (
     <div className="container">
       {message ? (
-        <p style={{ color: 'green' }}>{message}</p>
+        <>
+          <p style={{ color: 'green' }}>{message}</p>
+          <p>
+            Want to log in now?{' '}
+            <Link to="/login">Log In</Link>
+          </p>
+        </>
       ) : (
         <>
           <h2>Sign Up</h2>
@@ -76,30 +81,29 @@ function Signup() {
               />
             </div>
             <div style={{ position: 'relative', display: 'inline-block' }}>
-  <input 
-    type={showPassword ? "text" : "password"}
-    name="password"
-    placeholder="Password"
-    onChange={handleChange}
-    required
-    style={{ width: '200px', paddingRight: '0.8em' }}
-  />
-  <span 
-    onClick={togglePassword}
-    style={{
-      position: 'absolute',
-      right: '0.5em',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      cursor: 'pointer',
-      userSelect: 'none',
-      fontSize: '1.2em'
-    }}
-  >
-    {showPassword ? <FaEyeSlash /> : <FaEye />}
-  </span>
-</div>
-
+              <input 
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+                required
+                style={{ width: '200px', paddingRight: '0.8em' }}
+              />
+              <span 
+                onClick={togglePassword}
+                style={{
+                  position: 'absolute',
+                  right: '0.5em',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  cursor: 'pointer',
+                  userSelect: 'none',
+                  fontSize: '1.2em'
+                }}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
             <div>
               <select name="instrument" onChange={handleChange} required style={{ width: '225px', paddingRight: '0.8em' }}>
                 <option value="">Select Instrument</option>
@@ -111,21 +115,21 @@ function Signup() {
                 <option value="vocals">Vocals</option>
               </select>
             </div>
-            <button type="submit" style={{width: '200px', marginLeft: '150px'}}>Sign Up</button>
+            <button type="submit" style={{ width: '200px', marginLeft: '150px' }}>Sign Up</button>
           </form>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <p>
+            Already registered?{' '}
+            <Link to="/login">Click here to log in</Link>.
+          </p>
+          <p>
+            Want to sign up as admin?{' '}
+            <Link to="/admin/signup">
+              <button type="button" style={{ width: '200px', marginLeft: '150px' }}>Sign Up as Admin</button>
+            </Link>
+          </p>
         </>
       )}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <p>
-        Already registered?{' '}
-        <Link to="/login">Click here to log in</Link>.
-      </p>
-      <p>
-        Want to sign up as admin?{' '}
-        <Link to="/admin/signup">
-          <button type="button" style={{width: '200px', marginLeft: '150px'}}>Sign Up as Admin</button>
-        </Link>
-      </p>
     </div>
   );
 }
