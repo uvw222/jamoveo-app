@@ -12,13 +12,10 @@ function Results() {
   const navigate = useNavigate();
   const query = location.state?.query || '';
 
-  // Example song data – adjust as needed
-  const songs = [
-    { id: 1, name: 'Hey Jude', artist: 'The Beatles', data: heyJude },
-    { id: 2, name: 'ואיך שלא', artist: 'אריאל זילבר', data: veechShelo }
-  ];
+  // Use the complete song objects imported from JSON.
+  const songs = [heyJude, veechShelo];
 
-  // Filter songs by query (case-insensitive)
+  // Filter songs by query (case-insensitive).
   const filteredSongs = songs.filter(
     (song) =>
       song.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -28,7 +25,8 @@ function Results() {
   const handleSelect = (song) => {
     console.log('Admin: Emitting songUpdate:', song);
     socket.emit('songUpdate', song);
-    const instrument = localStorage.getItem('instrument') || '';
+    // Retrieve instrument from sessionStorage (matching the signup storage).
+    const instrument = sessionStorage.getItem('instrument') || '';
     navigate('/live', { state: { song, userRole: 'admin', instrument } });
   };
 
@@ -38,9 +36,9 @@ function Results() {
       <h2>Search Results for "{query}"</h2>
       {filteredSongs.length > 0 ? (
         <ul style={{ listStyle: 'none', padding: 0 }}>
-          {filteredSongs.map((song) => (
+          {filteredSongs.map((song, index) => (
             <li
-              key={song.id}
+              key={index}
               style={{
                 cursor: 'pointer',
                 padding: '1em',

@@ -10,7 +10,7 @@ function AdminMain() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Navigate to the Results page and pass the query in state
+    // Navigate to the Results page and pass the query in state.
     navigate('/results', { state: { query } });
   };
 

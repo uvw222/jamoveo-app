@@ -17,9 +17,9 @@ function PlayerMain() {
   
     socket.on('songUpdate', (songData) => {
       console.log('PlayerMain: Received songUpdate:', songData);
-      // Retrieve instrument from sessionStorage (each tab has its own sessionStorage).
+      // Retrieve the instrument from sessionStorage.
       const instrument = sessionStorage.getItem('instrument') || '';
-      console.log('players instrument:', instrument);
+      console.log("Player's instrument:", instrument);
       navigate('/live', { state: { song: songData, userRole: 'player', instrument } });
     });
     
