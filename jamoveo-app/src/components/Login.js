@@ -1,6 +1,7 @@
 // src/components/Login.js
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '../App.css'; 
 
 function Login() {
@@ -14,7 +15,7 @@ function Login() {
   };
 
   const togglePassword = () => {
-    setShowPassword((prev) => !prev);
+    setShowPassword(prev => !prev);
   };
 
   const handleSubmit = async (e) => {
@@ -71,10 +72,11 @@ function Login() {
               top: '50%',
               transform: 'translateY(-50%)',
               cursor: 'pointer',
-              userSelect: 'none'
+              userSelect: 'none',
+              fontSize: '1.2em'
             }}
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>
         <button type="submit">Log In</button>
